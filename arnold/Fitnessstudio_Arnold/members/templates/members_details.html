@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1>{{ mymember.firstname }} {{ mymember.lastname }}</h1>
+  
+<p>Phone: {{ mymember.phone }}</p>
+<p>Email: {{ mymember.email }}</p>
+<p>Geburtstag: {{ mymember.birthday }}</p>
+<p>Abonement: {{ mymember.abonement }}</p>
+
+
+<p>Back to <a href="{% url 'all_members' %}">Members</a></p>
+
+</body>
+</html>
+

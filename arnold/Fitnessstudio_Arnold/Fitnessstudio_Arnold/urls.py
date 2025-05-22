@@ -1,0 +1,40 @@
+"""
+URL configuration for Fitnessstudio_Arnold project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+
+from django.contrib import admin
+from django.urls import include, path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from members.views import dashboard, login_page, dashboard_api
+from rest_framework import routers
+from members.views import MemberViewSet, EmployeeViewSet, dashboard
+
+router = routers.DefaultRouter()
+router.register(r'member', MemberViewSet)
+router.register(r'employee', EmployeeViewSet)
+
+
+urlpatterns = [
+    path('', include('members.urls')),
+    path('admin/', admin.site.urls),
+    path('api/', include('members.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('login/', login_page, name='login'),
+    path('api/dashboard/', dashboard_api, name='dashboard_api'),
+    path('', include(router.urls)),
+]

@@ -1,0 +1,29 @@
+<!-- <!DOCTYPE html>
+<html>
+<body> -->
+
+{% extends "master.html" %}
+
+{% block title %}
+Fitnessstudio Arnold - List of all members
+{% endblock %}
+  
+  
+{% block content %}
+
+
+
+<h1>Members</h1>
+  
+<ul>
+  {% for x in mymembers %}
+    <li><a href="{% url 'members_details' x.id %}">{{ x.firstname }} {{ x.lastname }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
+
+
+<!-- </body>
+</html> -->

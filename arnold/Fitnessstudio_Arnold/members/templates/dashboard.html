@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+  <header>
+    <h2>Dashboard</h2>
+    <p id="message"></p>
+    <button onclick="logout()" class="btn logout-btn">Logout</button>
+  </header>
+
+  <!-- Zusammenfassung: Anzahl Mitglieder & Umsatz -->
+  <section class="dashboard-summary">
+    <p>Anzahl Mitglieder: <span id="memberCount">0</span></p>
+    <p>Umsatz: <span id="revenue">0</span> €</p>
+  </section>
+
+  <main>
+    <!-- Mitglieder Tabelle -->
+    <section class="table-section">
+      <h3>Mitglieder</h3>
+      <button class="btn add-btn" onclick="openModal('member', 'add')">Neues Mitglied hinzufügen</button>
+      <table id="membersTable">
+        <thead>
+          <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Geburtstag</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Abonnement</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Inhalte werden per JavaScript geladen -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Mitarbeiter Tabelle -->
+    <section class="table-section">
+      <h3>Mitarbeiter</h3>
+      <button class="btn add-btn" onclick="openModal('employee', 'add')">Neuen Mitarbeiter hinzufügen</button>
+      <table id="employeesTable">
+        <thead>
+          <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Geburtstag</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Position</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Inhalte werden per JavaScript geladen -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Modal für CRUD-Formulare -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle">Formular</h3>
+      <form id="crudForm">
+        <input type="hidden" id="recordId">
+        <input type="hidden" id="recordType">
+        <div class="form-group">
+          <label for="firstname">Vorname:</label>
+          <input type="text" id="firstname" required>
+        </div>
+        <div class="form-group">
+          <label for="lastname">Nachname:</label>
+          <input type="text" id="lastname" required>
+        </div>
+        <div class="form-group">
+          <label for="birthday">Geburtstag:</label>
+          <input type="date" id="birthday" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon:</label>
+          <input type="text" id="phone" required>
+        </div>
+        <!-- Dynamisch: Abonnement (Member) oder Position (Employee) -->
+        <div class="form-group" id="extraField"></div>
+        <div class="form-actions">
+          <button type="submit" class="btn save-btn">Speichern</button>
+          <button type="button" class="btn cancel-btn" onclick="closeModal()">Abbrechen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
+
